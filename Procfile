@@ -1,0 +1,1 @@
+web: gunicorn NextGen_Teche.wsgi

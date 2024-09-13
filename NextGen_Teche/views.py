@@ -1,7 +1,7 @@
 # from django.http import HttpResponse
 from django.shortcuts import render 
 from contact.models import Contact
-from product.models import Product
+# from product.models import Product
 from service.models import Service
 from recruitment.models import Recruitment
 from internship.models import Internship
@@ -10,12 +10,12 @@ from django.core.files.storage import FileSystemStorage
 def home(request):
     return render(request,"index.html")
 
-def product(request):
-    products = Product.objects.all()
-    data={
-        'products':products
-    }
-    return render (request,"product.html",data)
+# def product(request):
+#     products = Product.objects.all()
+#     data={
+#         'products':products
+#     }
+#     return render (request,"product.html",data)
 
 def service(request):
     services = Service.objects.all()

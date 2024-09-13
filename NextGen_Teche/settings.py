@@ -9,9 +9,13 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
-
+import dj_database_url
+import os
 from pathlib import Path
-# from .info import *
+from decouple import config
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -47,11 +51,12 @@ INSTALLED_APPS = [
     'contact',
     'service',
     'internship',
-    'product',
+    # 'product',
     'recruitment',
 ]
 
 MIDDLEWARE = [
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -60,6 +65,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 ROOT_URLCONF = 'NextGen_Teche.urls'
 
@@ -86,10 +93,11 @@ WSGI_APPLICATION = 'NextGen_Teche.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.config(
+        default=config("DATABASE_URL"),
+        conn_max_age=600,  # Optional: keeps DB connection alive
+        ssl_require=True   # Neon requires SSL
+    )
 }
 
 

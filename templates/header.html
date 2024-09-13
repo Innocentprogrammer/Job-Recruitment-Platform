@@ -943,7 +943,7 @@
     <!-- Header Section Starts -->
     <header class="header">
         <div class="logo">
-            <h1>Sarika Trader</h1>
+            <a href="/home" style="text-decoration: none;"><h1>Sarika Trader</h1></a>
         </div>
         {% for message in messages %}
         <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
@@ -957,7 +957,6 @@
                 <ul style="list-style-type: none;">
                     <li><a href="/home">Home</a></li>
                     <li><a href="/home/#about">AboutUs</a></li>
-                    <li><a href="/product">Product</a></li>
                     <li><a href="/service">Services</a></li>
                     <li><a href="/internship">Career</a></li>
                     <li><a href="/home/#team">Team</a></li>
@@ -965,7 +964,7 @@
                     {% if user.is_authenticated %}
                     <li> <button type="submit"><a href="/signout">SignOut</a></button></li>
                     <li>
-                        <h3>Hi {{fname}}</h3>
+                        <h3>Hi {{user.first_name}}</h3>
                     </li>
                     {% else %}
                     <li><button type="submit"><a href="/signin">SignIn</a></button></li>
